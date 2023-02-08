@@ -17,6 +17,7 @@ class Calculator {
                 System.out.println(calculate.calculateResult(splitInput));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+
                 return;
             }
         }

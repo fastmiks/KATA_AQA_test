@@ -8,7 +8,7 @@ class Validate {
             throw new IllegalArgumentException("the format of the mathematical operation does not satisfy the task - two operands and one operator (+, -, /, *)");
         }
 
-        // CHECK TWO OPERANDS ARE NUMBERS
+        // CHECK TWO OPERANDS ARE NUMBERS AND NOT SOMETHING ELSE
         if (!isNumber(splitInput[0]) || !isNumber(splitInput[2])) {
             throw new IllegalArgumentException("This is not a mathematical expression");
         }

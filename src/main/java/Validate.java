@@ -1,16 +1,27 @@
 import java.lang.Integer;
-import static org.codehaus.groovy.runtime.StringGroovyMethods.isNumber;
+import java.util.regex.Pattern;
 
 class Validate {
     public void validateExpression(String[] splitInput) throws IllegalArgumentException {
         // CHECK EXPRESSION: TWO OPERANDS, ONE OPERATOR
-        if (splitInput.length != 3) {
+        if (splitInput.length > 3) {
             throw new IllegalArgumentException("the format of the mathematical operation does not satisfy the task - two operands and one operator (+, -, /, *)");
+        } else if (splitInput.length < 3) {
+            throw new IllegalArgumentException("Not a mathematical expression");
         }
 
-        // CHECK TWO OPERANDS ARE NUMBERS AND NOT SOMETHING ELSE
-        if (!isNumber(splitInput[0]) || !isNumber(splitInput[2])) {
-            throw new IllegalArgumentException("This is not a mathematical expression");
+        // CHECK IF OPERANDS ARE THE WHOLE NUMBER
+        String operand1 = splitInput[0];
+        String operand2 = splitInput[2];
+
+        Pattern pattern = Pattern.compile("^\\d+(\\.|,)\\d+?$");
+        try {
+            double checkIfWeHaveNumber = Double.parseDouble(operand1.replace(",", ".")) + Double.parseDouble(operand2.replace(",", "."));
+            if (!pattern.matcher(operand1).matches() || !pattern.matcher(operand2).matches()) {
+                throw new IllegalArgumentException("Only whole numbers are allowed");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Please enter numbers instead of characters for calculator to work");
         }
 
         // CHECK TWO OPERANDS ARE NUMBERS FROM 1 TO 10

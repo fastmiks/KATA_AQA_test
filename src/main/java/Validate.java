@@ -14,7 +14,8 @@ class Validate {
         String operand1 = splitInput[0];
         String operand2 = splitInput[2];
 
-        Pattern pattern = Pattern.compile("^\\d+(\\.|,)\\d+?$");
+
+        Pattern pattern = Pattern.compile("^\\d+$");
         try {
             double checkIfWeHaveNumber = Double.parseDouble(operand1.replace(",", ".")) + Double.parseDouble(operand2.replace(",", "."));
             if (!pattern.matcher(operand1).matches() || !pattern.matcher(operand2).matches()) {
